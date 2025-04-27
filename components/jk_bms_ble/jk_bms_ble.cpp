@@ -297,7 +297,11 @@ void JkBmsBle::assemble(const uint8_t *data, uint16_t length) {
 void JkBmsBle::decode_(const std::vector<uint8_t> &data) {
   this->reset_online_status_tracker_();
 
-    ESP_LOGI(TAG, "Hex frame  %s", format_hex_pretty(&data.front(), data.size()).c_str());
+std::string hexString = format_hex_pretty(&data.front(), data.size());
+const size_t chunkSize = 200;
+for (size_t i = 0; i < hexString.length(); i += chunkSize) {
+    ESP_LOGI(TAG, "Hex frame chunk: %s", hexString.substr(i, chunkSize).c_str());
+}
 
     
   uint8_t frame_type = data[4];
