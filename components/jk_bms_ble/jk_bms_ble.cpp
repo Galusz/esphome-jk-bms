@@ -290,7 +290,7 @@ void JkBmsBle::assemble(const uint8_t *data, uint16_t length) {
 
     std::vector<uint8_t> data(this->frame_buffer_.begin(), this->frame_buffer_.end());
 
-         ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front() + 150, data.size() - 150).c_str());
+         ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front(), data.size()).c_str());
 
     this->decode_(data);
     this->frame_buffer_.clear();
