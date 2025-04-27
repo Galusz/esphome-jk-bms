@@ -290,6 +290,8 @@ void JkBmsBle::assemble(const uint8_t *data, uint16_t length) {
 
     std::vector<uint8_t> data(this->frame_buffer_.begin(), this->frame_buffer_.end());
 
+        ESP_LOGI(TAG, "HEX frame: %s", format_hex_pretty(data, sizeof(data)).c_str());
+
     this->decode_(data);
     this->frame_buffer_.clear();
   }
@@ -345,6 +347,7 @@ void JkBmsBle::decode_jk02_cell_info_(const std::vector<uint8_t> &data) {
   ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front(), 150).c_str());
   ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front() + 150, data.size() - 150).c_str());
 
+    
   // 6 example responses (128+128+44 = 300 bytes per frame)
   //
   //
