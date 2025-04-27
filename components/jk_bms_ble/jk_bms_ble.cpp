@@ -289,9 +289,6 @@ void JkBmsBle::assemble(const uint8_t *data, uint16_t length) {
     }
 
     std::vector<uint8_t> data(this->frame_buffer_.begin(), this->frame_buffer_.end());
-
-         ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front(), data.size()).c_str());
-
     this->decode_(data);
     this->frame_buffer_.clear();
   }
@@ -300,6 +297,9 @@ void JkBmsBle::assemble(const uint8_t *data, uint16_t length) {
 void JkBmsBle::decode_(const std::vector<uint8_t> &data) {
   this->reset_online_status_tracker_();
 
+    ESP_LOGI(TAG, "Hex frame  %s", format_hex_pretty(&data.front(), data.size()).c_str());
+
+    
   uint8_t frame_type = data[4];
   switch (frame_type) {
     case 0x01:
