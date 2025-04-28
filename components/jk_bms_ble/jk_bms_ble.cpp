@@ -630,6 +630,13 @@ void JkBmsBle::decode_jk02_cell_info_(const std::vector<uint8_t> &data) {
                          (float) ((int16_t) jk_get_16bit(226 + offset)) * 0.1f);
   }
 
+
+      ESP_LOGI(TAG, "Hex_All  %s", format_hex_pretty(&data.front() + 249, data.size() - 249).c_str());
+
+  
+
+
+    
   // 299   1   0xCD                   CRC
 
   this->status_notification_received_ = true;
