@@ -104,7 +104,7 @@ CONF_BALANCING_CURRENT = "balancing_current"
 CONF_ERRORS_BITMASK = "errors_bitmask"
 CONF_EMERGENCY_TIME_COUNTDOWN = "emergency_time_countdown"
 CONF_HEATING_CURRENT = "heating_current"
-
+CONF_CHARGING_STATUS = "charging_status"
 
 UNIT_AMPERE_HOURS = "Ah"
 UNIT_OHM = "Ω"
@@ -194,6 +194,7 @@ SENSORS = [
     CONF_CURRENT,
     CONF_POWER,
     CONF_CHARGING_POWER,
+    CONF_CHARGING_STATUS,
     CONF_DISCHARGING_POWER,
     CONF_POWER_TUBE_TEMPERATURE,
     CONF_STATE_OF_CHARGE,
@@ -621,6 +622,13 @@ CONFIG_SCHEMA = JK_BMS_BLE_COMPONENT_SCHEMA.extend(
             unit_of_measurement=UNIT_WATT,
             icon=ICON_EMPTY,
             accuracy_decimals=2,
+            device_class=DEVICE_CLASS_POWER,
+            state_class=STATE_CLASS_MEASUREMENT,
+        ),
+        cv.Optional(CONF_CHARGING_STATUS): sensor.sensor_schema(
+            unit_of_measurement=UNIT_EMPTY,
+            icon=ICON_EMPTY,
+            accuracy_decimals=0,
             device_class=DEVICE_CLASS_POWER,
             state_class=STATE_CLASS_MEASUREMENT,
         ),
