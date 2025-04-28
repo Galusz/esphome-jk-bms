@@ -118,6 +118,7 @@ void JkBmsBle::dump_config() {  // NOLINT(google-readability-function-size,reada
   LOG_SENSOR("", "Power", this->power_sensor_);
   LOG_SENSOR("", "Charging Power", this->charging_power_sensor_);
   LOG_SENSOR("", "Discharging Power", this->discharging_power_sensor_);
+  LOG_SENSOR("", "Charging Status", this->charging_status_sensor_);
   LOG_SENSOR("", "Power Tube Temperature", this->power_tube_temperature_sensor_);
   LOG_SENSOR("", "Temperature Sensor 1", this->temperatures_[0].temperature_sensor_);
   LOG_SENSOR("", "Temperature Sensor 2", this->temperatures_[1].temperature_sensor_);
@@ -628,10 +629,12 @@ void JkBmsBle::decode_jk02_cell_info_(const std::vector<uint8_t> &data) {
                          (float) ((int16_t) jk_get_16bit(224 + offset)) * 0.1f);
     this->publish_state_(this->temperatures_[2].temperature_sensor_,
                          (float) ((int16_t) jk_get_16bit(226 + offset)) * 0.1f);
+      
+    this->publish_state_(this->charging_status_sensor_, (float) ((int16_t) jk_get_16bit(281 + offset)));
   }
 
 
-      ESP_LOGI(TAG, "Hex_All  %s", format_hex_pretty(&data.front() + 249, data.size() - 249).c_str());
+      ESP_LOGI(TAG, "Hex_All  %s", format_hex_pretty(&data.front() + 281, data.size() - 281).c_str());
 
   
 
