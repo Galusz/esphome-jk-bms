@@ -630,11 +630,11 @@ void JkBmsBle::decode_jk02_cell_info_(const std::vector<uint8_t> &data) {
     this->publish_state_(this->temperatures_[2].temperature_sensor_,
                          (float) ((int16_t) jk_get_16bit(226 + offset)) * 0.1f);
       
-    this->publish_state_(this->charging_status_sensor_, (float) ((int16_t) jk_get_16bit(281 + offset)));
+    this->publish_state_(this->charging_status_sensor_, (unsigned long) jk_get_32bit(280 + offset));
   }
 
 
-      ESP_LOGI(TAG, "Hex_All  %s", format_hex_pretty(&data.front() + 281, data.size() - 281).c_str());
+      ESP_LOGI(TAG, "Hex_All  %s", format_hex_pretty(&data.front() + 280, data.size() - 280).c_str());
 
   
 
