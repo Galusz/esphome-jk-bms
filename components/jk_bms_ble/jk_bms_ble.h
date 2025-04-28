@@ -202,6 +202,9 @@ class JkBmsBle : public esphome::ble_client::BLEClientNode, public PollingCompon
   void set_charging_power_sensor(sensor::Sensor *charging_power_sensor) {
     charging_power_sensor_ = charging_power_sensor;
   }
+  void set_charging_status_sensor(sensor::Sensor *charging_status_sensor) {
+    charging_status_sensor_ = charging_status_sensor;
+  }
   void set_discharging_power_sensor(sensor::Sensor *discharging_power_sensor) {
     discharging_power_sensor_ = discharging_power_sensor;
   }
